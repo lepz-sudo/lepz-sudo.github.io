@@ -1,1 +1,506 @@
 
+Action: file_editor create /app/love-page/index.html --file-text "<!DOCTYPE html>
+<html lang=\"id\">
+<head>
+<meta charset=\"UTF-8\" />
+<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+<title>I LOVE YOU DONIZ NOVAYAN IVANEZ</title>
+<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+<link href=\"https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap\" rel=\"stylesheet\">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at top, #ffd6e0 0%, #ff8fa3 35%, #c9184a 75%, #800f2f 100%);
+    color: #fff;
+    user-select: none;
+    cursor: url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><path fill='%23ff2d6f' stroke='%23fff' stroke-width='1.5' d='M12 21s-7-4.35-9.5-9.5C.8 8 3 4 6.5 4 8.7 4 10.5 5.3 12 7.2 13.5 5.3 15.3 4 17.5 4 21 4 23.2 8 21.5 11.5 19 16.65 12 21 12 21z'/></svg>\") 14 14, auto;
+  }
+
+  /* Stars background */
+  .stars {
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+      radial-gradient(2px 2px at 40% 70%, #ffe8ee, transparent),
+      radial-gradient(1px 1px at 50px 160px, #fff, transparent),
+      radial-gradient(1px 1px at 90% 40%, #ffd6e0, transparent),
+      radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+      radial-gradient(1px 1px at 60% 90%, #ffe8ee, transparent),
+      radial-gradient(1.5px 1.5px at 80% 10%, #fff, transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.55;
+    animation: twinkle 6s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes twinkle { from { opacity: 0.35; } to { opacity: 0.85; } }
+
+  /* Main scene */
+  .scene {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    z-index: 2;
+  }
+
+  /* Heart */
+  .heart-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-bottom: 36px;
+    filter: drop-shadow(0 10px 35px rgba(255, 22, 84, 0.55));
+    animation: floaty 4.2s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  .heart {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-45deg);
+    animation: beat 1.1s ease-in-out infinite;
+  }
+  @keyframes beat {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    20% { transform: rotate(-45deg) scale(1.12); }
+    40% { transform: rotate(-45deg) scale(0.98); }
+    60% { transform: rotate(-45deg) scale(1.1); }
+    80% { transform: rotate(-45deg) scale(1); }
+  }
+
+  .heart .lobe, .heart .body {
+    position: absolute;
+    background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 60%, #800f2f 100%);
+    box-shadow:
+      inset 12px -10px 30px rgba(255, 255, 255, 0.18),
+      inset -10px 10px 35px rgba(0, 0, 0, 0.25);
+  }
+  .heart .body {
+    width: 160px; height: 160px;
+    left: 30px; top: 30px;
+    border-radius: 8px;
+  }
+  .heart .lobe {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+  }
+  .heart .lobe.left  { left: -50px; top: 30px; }
+  .heart .lobe.right { left: 30px; top: -50px; }
+
+  /* Heart glow ring */
+  .heart-glow {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 105, 145, 0.45) 0%, rgba(255, 105, 145, 0) 65%);
+    animation: pulseGlow 1.1s ease-in-out infinite;
+    z-index: -1;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.18); opacity: 0.9; }
+  }
+
+  /* Text */
+  .love-line {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #fff0f3;
+    text-shadow: 0 4px 18px rgba(128, 15, 47, 0.6);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 1.2s ease 0.3s forwards;
+  }
+  .main-title {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: clamp(34px, 6.5vw, 68px);
+    line-height: 1.15;
+    background: linear-gradient(180deg, #fff 0%, #ffd6e0 50%, #ff8fa3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 8px 30px rgba(255, 22, 84, 0.35);
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 1.2s ease 0.6s forwards, shimmer 4s linear infinite 1.8s;
+  }
+  .name {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: clamp(38px, 7.5vw, 80px);
+    line-height: 1.05;
+    margin-top: 4px;
+    background: linear-gradient(180deg, #fff 0%, #ffe8ee 40%, #ff6b8a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 8px 40px rgba(255, 22, 84, 0.55);
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 1.2s ease 1s forwards;
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.15); }
+  }
+
+  /* Subtitle / signature */
+  .signature {
+    margin-top: 22px;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255, 240, 243, 0.85);
+    opacity: 0;
+    animation: rise 1.2s ease 1.4s forwards;
+  }
+  .signature .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 10px;
+    transform: translateY(-3px);
+  }
+
+  /* Floating hearts */
+  .float-heart {
+    position: absolute;
+    bottom: -40px;
+    width: 22px;
+    height: 22px;
+    transform: rotate(-45deg);
+    opacity: 0;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+  .float-heart::before,
+  .float-heart::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #ff4d6d;
+    border-radius: 50%;
+  }
+  .float-heart::before { left: -11px; top: 0; }
+  .float-heart::after  { left: 0; top: -11px; }
+  .float-heart .square {
+    position: absolute;
+    inset: 0;
+    background: #ff4d6d;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg) scale(0.6); opacity: 0; }
+    10% { opacity: 0.9; }
+    100% { transform: translateY(-110vh) rotate(-45deg) scale(1.1); opacity: 0; }
+  }
+
+  /* Music button */
+  .music-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .music-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+  .music-btn .icon {
+    width: 16px; height: 16px;
+    display: inline-block;
+    background: #ff4d6d;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ff4d6d;
+    animation: pulseDot 1.1s ease-in-out infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+  }
+
+  /* Overlay start (for audio autoplay policy) */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(128, 15, 47, 0.55), rgba(0, 0, 0, 0.85));
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  .overlay.hidden { opacity: 0; visibility: hidden; }
+  .overlay h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(36px, 6vw, 64px);
+    color: #ffe8ee;
+    margin-bottom: 14px;
+  }
+  .overlay p {
+    color: rgba(255, 232, 238, 0.85);
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+  .start-btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 14px 40px rgba(255, 22, 84, 0.55);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .start-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 18px 50px rgba(255, 22, 84, 0.7);
+  }
+
+  @media (max-width: 480px) {
+    .heart-wrap { width: 170px; height: 170px; }
+    .heart .body { width: 124px; height: 124px; left: 23px; top: 23px; }
+    .heart .lobe { width: 124px; height: 124px; }
+    .heart .lobe.left  { left: -38px; top: 23px; }
+    .heart .lobe.right { left: 23px; top: -38px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class=\"stars\"></div>
+
+  <!-- Floating hearts container -->
+  <div id=\"hearts\"></div>
+
+  <!-- Main scene -->
+  <div class=\"scene\">
+    <div class=\"heart-wrap\" id=\"heartWrap\">
+      <div class=\"heart-glow\"></div>
+      <div class=\"heart\">
+        <div class=\"lobe left\"></div>
+        <div class=\"lobe right\"></div>
+        <div class=\"body\"></div>
+      </div>
+    </div>
+
+    <div class=\"love-line\">with all my heart</div>
+    <div class=\"main-title\">I LOVE YOU</div>
+    <div class=\"name\">Doniz Novayan Ivanez</div>
+    <div class=\"signature\"><span class=\"dot\"></span>Forever &amp; Always<span class=\"dot\"></span></div>
+  </div>
+
+  <!-- Music toggle -->
+  <button class=\"music-btn\" id=\"musicBtn\" type=\"button\">
+    <span class=\"icon\"></span>
+    <span id=\"musicLabel\">MUSIC ON</span>
+  </button>
+
+  <!-- Start overlay (required for audio autoplay) -->
+  <div class=\"overlay\" id=\"overlay\">
+    <h2>A little something for you...</h2>
+    <p>Tap to open with music &amp; love</p>
+    <button class=\"start-btn\" id=\"startBtn\" type=\"button\">OPEN WITH LOVE</button>
+  </div>
+
+  <script>
+    // ---------- Floating hearts ----------
+    const heartsContainer = document.getElementById('hearts');
+    const colors = ['#ff4d6d', '#ff8fa3', '#ffb3c1', '#c9184a', '#ff6b8a'];
+
+    function spawnHeart() {
+      const h = document.createElement('div');
+      h.className = 'float-heart';
+      const size = 14 + Math.random() * 22;
+      const left = Math.random() * 100;
+      const dur = 6 + Math.random() * 7;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      h.style.left = left + 'vw';
+      h.style.width = size + 'px';
+      h.style.height = size + 'px';
+      h.style.animationDuration = dur + 's';
+      h.style.setProperty('--c', color);
+      h.innerHTML = '<span class=\"square\"></span>';
+      // recolor pseudo via inline style trick: set background via CSS variable
+      h.querySelector('.square').style.background = color;
+      // also recolor the ::before/::after via style sheet rule per element
+      const styleId = 'fh-' + Math.random().toString(36).slice(2, 8);
+      h.setAttribute('data-id', styleId);
+      const s = document.createElement('style');
+      s.textContent = `
+        .float-heart[data-id=\"${styleId}\"]::before,
+        .float-heart[data-id=\"${styleId}\"]::after { background: ${color}; }
+      `;
+      document.head.appendChild(s);
+      heartsContainer.appendChild(h);
+
+      setTimeout(() => {
+        h.remove();
+        s.remove();
+      }, dur * 1000 + 200);
+    }
+
+    let heartInterval = null;
+    function startHearts() {
+      if (heartInterval) return;
+      heartInterval = setInterval(spawnHeart, 380);
+      // initial burst
+      for (let i = 0; i < 8; i++) setTimeout(spawnHeart, i * 120);
+    }
+
+    // ---------- Music (Web Audio API romantic melody) ----------
+    let audioCtx = null;
+    let musicOn = false;
+    let melodyTimer = null;
+
+    // A simple, soft romantic melody (notes in Hz)
+    // Inspired by a gentle waltz progression
+    const melody = [
+      { f: 392.00, d: 0.5 }, // G4
+      { f: 523.25, d: 0.5 }, // C5
+      { f: 659.25, d: 0.5 }, // E5
+      { f: 587.33, d: 0.75 }, // D5
+      { f: 523.25, d: 0.5 }, // C5
+      { f: 493.88, d: 0.5 }, // B4
+      { f: 440.00, d: 0.75 }, // A4
+      { f: 392.00, d: 0.5 }, // G4
+      { f: 349.23, d: 0.5 }, // F4
+      { f: 392.00, d: 0.5 }, // G4
+      { f: 440.00, d: 0.5 }, // A4
+      { f: 392.00, d: 1.0 }, // G4
+    ];
+
+    function playNote(ctx, freq, startTime, duration) {
+      // Main tone
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.18, startTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      // Soft chord harmonic (perfect fifth, low volume)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.value = freq * 1.5;
+      gain2.gain.setValueAtTime(0, startTime);
+      gain2.gain.linearRampToValueAtTime(0.05, startTime + 0.05);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      // Reverb-ish: soft lowpass
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 2400;
+
+      osc.connect(gain).connect(filter).connect(ctx.destination);
+      osc2.connect(gain2).connect(filter);
+
+      osc.start(startTime);
+      osc2.start(startTime);
+      osc.stop(startTime + duration + 0.05);
+      osc2.stop(startTime + duration + 0.05);
+    }
+
+    function scheduleMelody() {
+      if (!audioCtx || !musicOn) return;
+      const now = audioCtx.currentTime + 0.05;
+      let t = now;
+      melody.forEach(n => {
+        playNote(audioCtx, n.f, t, n.d);
+        t += n.d;
+      });
+      const totalDur = (t - now) * 1000;
+      melodyTimer = setTimeout(scheduleMelody, totalDur + 400);
+    }
+
+    function startMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      musicOn = true;
+      document.getElementById('musicLabel').textContent = 'MUSIC ON';
+      scheduleMelody();
+    }
+
+    function stopMusic() {
+      musicOn = false;
+      if (melodyTimer) { clearTimeout(melodyTimer); melodyTimer = null; }
+      if (audioCtx && audioCtx.state === 'running') audioCtx.suspend();
+      document.getElementById('musicLabel').textContent = 'MUSIC OFF';
+    }
+
+    // ---------- Heart click → burst ----------
+    document.getElementById('heartWrap').addEventListener('click', () => {
+      for (let i = 0; i < 14; i++) setTimeout(spawnHeart, i * 60);
+      // little ding
+      if (audioCtx && musicOn) {
+        const t = audioCtx.currentTime + 0.02;
+        playNote(audioCtx, 880, t, 0.4);
+        playNote(audioCtx, 1318.5, t + 0.08, 0.4);
+      }
+    });
+
+    // ---------- Music button ----------
+    document.getElementById('musicBtn').addEventListener('click', () => {
+      if (musicOn) stopMusic(); else startMusic();
+    });
+
+    // ---------- Start overlay ----------
+    document.getElementById('startBtn').addEventListener('click', () => {
+      document.getElementById('overlay').classList.add('hidden');
+      startHearts();
+      startMusic();
+    });
+  </script>
+</body>
+</html>
+"
+Observation: Create successful: /app/love-page/index.html
